@@ -45,6 +45,7 @@ def make_text(chains):
 
     key = choice(chains.keys())
     words = [key[0], key[1]]
+    
     while key in chains:
         # Keep looping until we have a key that isn't in the chains
         # (which would mean it was the end of our original text)
@@ -56,8 +57,13 @@ def make_text(chains):
         words.append(word)
         key = (key[1], word)
 
-    return " ".join(words)
+    final_text = " ".join(words)
 
+    # From Stack Overflow, possible way to stop on a whitespace
+    # return content[:length].rsplit(' ', 1)[0]+suffix
+    final_post = final_text[:129]
+    print final_post + " #hbgraceXV"
+    
 
 def tweet(chains):
     # Use Python os.environ to get at environmental variables
@@ -75,5 +81,6 @@ text = open_and_read_file(filenames)
 # Get a Markov chain
 chains = make_chains(text)
 
+make_text(chains)
 # Your task is to write a new function tweet, that will take chains as input
 # tweet(chains)
